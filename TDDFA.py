@@ -20,9 +20,11 @@ from utils.tddfa_util import (
     load_model, _parse_param, similar_transform,
     ToTensorGjz, NormalizeGjz
 )
-
+from os.path import join
 make_abs_path = lambda fn: osp.join(osp.dirname(osp.realpath(__file__)), fn)
 
+
+base_path = os.path.dirname(os.path.abspath(__file__))
 
 class TDDFA(object):
     """TDDFA: named Three-D Dense Face Alignment (TDDFA)"""
@@ -32,7 +34,7 @@ class TDDFA(object):
 
         # load BFM
         self.bfm = BFMModel(
-            bfm_fp=kvs.get('bfm_fp', make_abs_path('configs/bfm_noneck_v3.pkl')),
+            bfm_fp=kvs.get('bfm_fp', join(base_path, 'configs/bfm_noneck_v3.pkl')),
             shape_dim=kvs.get('shape_dim', 40),
             exp_dim=kvs.get('exp_dim', 10)
         )
